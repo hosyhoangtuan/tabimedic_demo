@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor List - Luxury Gradient UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font & Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c1: #667EEA;
+      --c2: #4A90E2;
+      --c3: #5CB3CC;
+      --gray-bg: #f3f6fa;
+      --white: #fff;
+      --darker: #2a3156;
+      --gray-600: #495057;
+      --gray-400: #ced4da;
+      --border-radius: 23px;
+      --shadow: 0 10px 30px -10px rgba(102,126,234,0.18);
+    }
+    body {
+      background: linear-gradient(120deg, var(--c1) 10%, var(--c2) 60%, var(--c3) 100%);
+      font-family: 'Noto Sans JP', sans-serif;
+      padding: 0;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* ---- HEADER ---- */
+    .main-header {
+      background: linear-gradient(90deg, #667EEA 0%);
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 4px 24px #2a547633;
+      padding: 0;
+      position:relative;
+      z-index:11;
+      margin-bottom: 0px;
+    }
+    .main-header-container {
+      max-width: 1700px;
+      margin: 0 auto;
+      padding: 0 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+    }
+    .main-header-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .main-logo-icon {
+      background: #fff;
+      border-radius: 14px;
+      width: 46px;
+      height: 46px;
+      display: flex;align-items:center;justify-content:center;
+      box-shadow: 0 2px 8px #3edfc813;
+      margin-right: 1px;
+    }
+    .main-logo-text {
+      color: #fff;
+      font-size: 31px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+    .main-header-menu {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 0;
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    margin-left: 550px;
+    }
+    .main-header-link {
+      color: #fff;
+      opacity: 0.94;
+      text-decoration: none;
+      padding: 7px 0;
+      transition: all .2s;
+      border-bottom: 2px solid transparent;
+      border-radius: 2px;
+    }
+    .main-header-link:hover, .main-header-link.active {
+      color: #fff;
+      opacity: 1;
+      border-bottom: 2.5px solid #10b981;
+      background: linear-gradient(90deg, #f6d36533 0%, #fecfef33 100%);
+    }
+    .main-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 19px;
+    }
+    .main-header-btn {
+      background:rgba(255,255,255,0.13);
+      border:1.7px solid rgba(255,255,255,0.30);
+      color:#fff;
+      border-radius:13px;
+      width:48px;height:48px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:22px;
+      cursor:pointer;
+      margin-right: 1px;
+      transition:.18s;
+      box-shadow:0 2px 11px #667eea22;
+    }
+    .main-header-btn:hover {
+      background:rgba(255,255,255,0.25);
+      border-color: #4A90E2;
+      color: #10b981;
+      transform:translateY(-2.5px) scale(1.08);
+    }
+    @media (max-width:900px){
+      .main-header-container {padding: 0 20px;}
+      .main-header-menu {gap:11px;font-size:15.8px;}
+      .main-logo-text {font-size:23px;}
+    }
+    @media (max-width:700px){
+      .main-header-container{flex-direction:column;align-items:flex-start;gap:13px;min-height:0;padding:0 8px;}
+      .main-header-logo{margin-bottom:6px;}
+      .main-header-menu{margin-bottom:7px;}
+      .main-logo-icon{width:38px;height:38px;}
+      .main-header-btn{width:37px;height:37px;font-size:16px;}
+      .main-logo-text{font-size:17px;}
+    }
+
+    /* ---- MAIN LIST & MAP ---- */
+    .doctor-list-wrap {
+      max-width: 1280px;
+      margin: 38px auto 0 auto;
+      display: flex;
+      gap: 0;
+      border-radius: var(--border-radius);
+      background:rgba(255,255,255,0.28);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 65vh;
+    }
+    .doctor-list-left {
+      width: 480px;
+      background: rgba(255,255,255,0.91);
+      padding: 26px 0;
+      min-height: 700px;
+      position: relative;
+      box-shadow: 0 2px 39px #a9ccf40f;
+    }
+    .doctor-list-header {
+      padding: 0 39px 14px 39px;
+      border-bottom: 2px solid #edf1fb;
+      font-weight: 700;
+      color: var(--c1);
+      display: flex; flex-direction: column; gap: 7px;
+      letter-spacing:1px;
+    }
+    .doctor-list-header .place {
+      color: var(--c2);
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .doctor-card {
+      background: var(--white);
+      margin: 28px 28px 0 28px;
+      border-radius: 17px;
+      box-shadow: 0 5px 24px #667eea22;
+      padding: 22px 24px 19px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      transition: box-shadow .15s, transform .18s;
+      border: 1.8px solid #e5e7fa;
+    }
+    .doctor-card:hover {
+      box-shadow: 0 15px 44px #4a90e245;
+      transform: translateY(-3px) scale(1.018);
+      border-color: var(--c2);
+      background:linear-gradient(102deg, #fafdff 80%, #eaf9fa 100%);
+    }
+    .doctor-img {
+      width: 78px; height: 78px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 2px 14px #667eea11;
+      border: 2.5px solid var(--white);
+    }
+    .doctor-info {
+      flex: 1;
+      display: flex; flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+    .doctor-info .name {
+      font-size: 1.15em;
+      font-weight: 700;
+      color: var(--darker);
+      letter-spacing:0.2px;
+      margin-bottom: 1px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .doctor-info .spec {
+      color: var(--c2); font-size: 1.01em; font-weight:600; margin-bottom: 6px;
+    }
+    .doctor-info .stars {
+      color: #3ad6a0; font-size:1.05em; letter-spacing:-1px;margin-bottom:5px;
+    }
+    .doctor-info .review {
+      color: var(--c2);
+      font-weight: 600;
+      margin-left: 4px;
+      font-size: 13px;
+    }
+    .doctor-info .desc {
+      color: var(--gray-600); font-size: 13px;
+      margin-bottom: 3px;
+      display: flex; gap: 6px;
+      align-items: center;
+    }
+    .doctor-info .desc i {color:var(--c2);}
+    .doctor-info .distance {
+      color: var(--c3); font-size: 13px;
+      margin-bottom: 1px;
+      display: flex; align-items: center; gap:5px;
+      font-weight: 600;
+    }
+    .doctor-options {
+      min-width: 125px;
+      text-align: center;
+      margin-left: 7px;
+      margin-top: 3px;
+    }
+    .doctor-options .fee {
+      font-size: 17px; color: var(--darker); font-weight:700;
+      margin-bottom: 8px;
+    }
+    .doctor-options .fee-label {
+      color: var(--gray-600); font-size: 13px;
+      font-weight: 500;margin-top:2px;margin-bottom:2px;display:block;
+    }
+    .doctor-options .book-btn {
+      border: none; width: 100%;
+      background: linear-gradient(90deg, var(--c1) 0%, var(--c2) 60%, var(--c3) 100%);
+      color: #fff; font-weight:700;
+      padding: 10px 0;
+      margin: 6px 0 0 0;
+      font-size: 15.4px;
+      border-radius: 11px;
+      cursor: pointer;
+      box-shadow: 0 2px 11px #4a90e222;
+      transition: background .17s, transform .12s;
+      letter-spacing: 1px;
+    }
+    .doctor-options .book-btn:hover {
+      background: linear-gradient(80deg, #4664d3 10%, #5cb3cc 90%);
+      transform: scale(1.045);
+    }
+    /* MAP COLUMN */
+    .doctor-list-map {
+      flex: 1;
+      min-width: 360px;
+      min-height: 700px;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: stretch; justify-content: stretch;
+      position:relative;
+    }
+    .doctor-list-map iframe {
+      width: 100%; height: 100%;
+      min-height: 700px;
+      border: none;
+      filter:brightness(0.98) contrast(1.07) grayscale(3%);
+      display: block;
+      position: absolute;
+      top:0;left:0;bottom:0;right:0;
+    }
+    @media (max-width:1100px) {
+      .doctor-list-wrap {flex-direction:column;}
+      .doctor-list-left,.doctor-list-map {width:100%;}
+      .doctor-list-map{min-height:350px;}
+      .doctor-list-map iframe{min-height:350px;}
+    }
+    @media (max-width:700px){
+      .doctor-list-wrap{margin:4vw 0 0 0;}
+      .doctor-card{margin:16px 5vw 0 5vw;}
+      .doctor-list-header {padding:0 2vw 11px 2vw;}
+      .doctor-list-left{padding:15px 0;}
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="main-header">
+    <div class="main-header-container">
+      <div class="main-header-logo">
+        <div class="main-logo-icon">
+          <!-- Bạn có thể thay SVG/icon khác ở đây -->
+          <svg width="28" height="28" viewBox="0 0 32 32">
+            <circle cx="16" cy="16" r="16" fill="#fff"/>
+            <path d="M8 17l3.3-3.6c.5-.5 1.4-.4 1.7.2l2.4 4.2 3.1-7c.3-.7 1.2-.8 1.7-.2l4.8 6.3" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="main-logo-text">旅メディ</span>
+      </div>
+      <nav class="main-header-menu">
+        <a href="#" class="main-header-link">予約</a>
+        <a href="#" class="main-header-link">アカウント</a>
+        <a href="#" class="main-header-link">旅メディ について</a>
+      </nav>
+      <div class="main-header-actions">
+        <button class="main-header-btn"><i class="fas fa-comments"></i></button>
+        <button class="main-header-btn"><i class="fas fa-cog"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="doctor-list-wrap">
+    <!-- LEFT - DOCTOR CARDS -->
+    <div class="doctor-list-left">
+      <div class="doctor-list-header">
+        <span style="font-size:20px;">
+          <i class="fas fa-stethoscope"></i> 一般内科医
+        </span>
+        <span class="place"><i class="fas fa-map-marker-alt"></i> 日本、東京都東京</span>
+      </div>
+      
+      <!-- BÁC SĨ #1 -->
+      <div class="doctor-card">
+        <img class="doctor-img" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr.">
+        <div class="doctor-info">
+          <div class="name">Dr. Mika W.
+            <span style="color:var(--c2); font-size:18px;"><i class="fas fa-angle-double-right"></i></span>
+          </div>
+          <div class="spec">一般内科医</div>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span class="review">(99+)</span>
+          </div>
+          <div class="desc"><i class="fas fa-hospital"></i>クリニック</div>
+          <div class="desc"><i class="fas fa-language"></i>英語, 日本語</div>
+          <div class="distance"><i class="fas fa-map-marker-alt"></i>現在地から 33.7 km</div>
+        </div>
+        <div class="doctor-options">
+          <span class="fee-label">この日時から</span>
+          <span class="fee">$97</span>
+          <button class="book-btn">今日</button>
+          <button class="book-btn">7月1日</button>
+          <button class="book-btn">7月2日</button>
+        </div>
+      </div>
+      
+      <!-- BÁC SĨ #2 -->
+      <div class="doctor-card">
+        <img class="doctor-img" src="https://randomuser.me/api/portraits/men/65.jpg" alt="Dr.">
+        <div class="doctor-info">
+          <div class="name">Dr. Koichi H.
+            <span style="color:var(--c2); font-size:18px;"><i class="fas fa-angle-double-right"></i></span>
+          </div>
+          <div class="spec">一般内科医</div>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span class="review">(22)</span>
+          </div>
+          <div class="desc"><i class="fas fa-hospital"></i>クリニック</div>
+          <div class="desc"><i class="fas fa-language"></i>英語, 日本語</div>
+          <div class="distance"><i class="fas fa-map-marker-alt"></i>現在地から 38.3 km</div>
+        </div>
+        <div class="doctor-options">
+          <span class="fee-label">この日時から</span>
+          <span class="fee">$97</span>
+          <button class="book-btn">今日</button>
+          <button class="book-btn">7月1日</button>
+          <button class="book-btn">7月2日</button>
+        </div>
+      </div>
+      <!-- Thêm bác sĩ tương tự ... -->
+    </div>
+    <!-- RIGHT - MAP -->
+    <div class="doctor-list-map">
+      <iframe 
+        src="https://www.openstreetmap.org/export/embed.html?bbox=139.2,34.8,141.2,36.4&amp;layer=mapnik"
+        allowfullscreen 
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        style="min-height: 100%; width: 100%; height: 100%; display: block;"
+      ></iframe>
+    </div>
+  </div>
+</body>
+</html>

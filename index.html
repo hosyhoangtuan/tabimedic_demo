@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>旅メディ Premium - Luxury Healthcare Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-blue: #4A90E2;
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --luxury-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      --gold-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      --ocean-gradient: linear-gradient(135deg, #667eea 0%, #4A90E2 50%, #5cb3cc 100%);
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --white: #ffffff;
+      --dark: #1a1a2e;
+      --gray-50: #fafbfc;
+      --gray-100: #f5f7fa;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-400: #ced4da;
+      --gray-500: #6c757d;
+      --gray-600: #495057;
+      --gray-700: #343a40;
+      --green: #10b981;
+      --luxury-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.2);
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+      --floating-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --border-radius: 24px;
+      --border-radius-lg: 32px;
+      --border-radius-sm: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--ocean-gradient);
+      min-height: 100vh;
+      color: var(--gray-700);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Background Effects */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 177, 153, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.2) 0%, transparent 50%);
+      z-index: -2;
+      animation: backgroundFloat 20s ease-in-out infinite;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/><feComponentTransfer><feFuncA type="discrete" tableValues="0 .5 0 .5 0 .5"/></feComponentTransfer></filter></defs><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
+      z-index: -1;
+    }
+
+    @keyframes backgroundFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      33% { transform: rotate(1deg) scale(1.05); }
+      66% { transform: rotate(-1deg) scale(0.95); }
+    }
+
+    /* Header */
+    .header {
+      padding: 25px 0;
+      position: relative;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--white);
+      border-radius: var(--border-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--green);
+      border-radius: 50%;
+      transform: scale(0.6);
+    }
+
+    .logo-icon i {
+      color: var(--white);
+      font-size: 20px;
+      z-index: 1;
+    }
+
+    .logo-text {
+      color: var(--white);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    margin-left: 550px;
+}
+
+    .nav-item {
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--white);
+      transition: width 0.3s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .nav-item:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .nav-btn {
+      width: 42px;
+      height: 42px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Main Search Section */
+    .hero-section {
+      padding: 80px 0 120px;
+      text-align: center;
+    }
+
+    .hero-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .hero-title {
+      color: var(--white);
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 50px;
+    }
+
+    .search-container {
+      background: var(--white);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      box-shadow: var(--floating-shadow);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .search-field {
+      position: relative;
+    }
+
+    .search-input, .search-select {
+      width: 100%;
+      padding: 18px 20px 18px 50px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--border-radius-sm);
+      font-size: 16px;
+      font-weight: 500;
+      background: var(--white);
+      transition: all 0.3s ease;
+      color: var(--gray-700);
+    }
+
+    .search-input:focus, .search-select:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      font-size: 18px;
+      z-index: 1;
+    }
+
+    .location-field {
+      grid-column: 1 / -1;
+    }
+
+    .symptoms-field {
+      grid-column: 1 / -1;
+    }
+
+    .search-btn {
+      background: var(--primary-gradient);
+      color: var(--white);
+      border: none;
+      padding: 18px 40px;
+      border-radius: var(--border-radius-sm);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(74, 144, 226, 0.4);
+    }
+
+    .search-btn i {
+      margin-right: 10px;
+    }
+
+    /* Specialties Section */
+    .specialties-section {
+      padding: 80px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .specialties-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      text-align: center;
+    }
+
+    .specialties-title {
+      color: var(--white);
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 60px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .specialty-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      padding: 40px 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .specialty-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .specialty-card:hover::before {
+      left: 100%;
+    }
+
+    .specialty-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--floating-shadow);
+    }
+
+    .specialty-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px;
+      background: var(--primary-gradient);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--white);
+      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .specialty-card:hover .specialty-icon {
+      transform: rotateY(180deg);
+      background: var(--gold-gradient);
+    }
+
+    .specialty-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    .specialty-subtitle {
+      color: var(--gray-500);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .features-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--gray-700);
+      margin-bottom: 20px;
+    }
+
+    .features-subtitle {
+      font-size: 18px;
+      color: var(--gray-500);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: var(--gray-50);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--gray-200);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow);
+      background: var(--white);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--luxury-gradient);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 25px;
+    }
+
+    .feature-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 15px;
+    }
+
+    .feature-description {
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 0;
+      background: var(--primary-gradient);
+      text-align: center;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .cta-title {
+      color: var(--white);
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 15px 35px;
+      border-radius: var(--border-radius-sm);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-btn.primary {
+      background: var(--white);
+      color: var(--primary-blue);
+    }
+
+    .cta-btn.secondary {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 20px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-container,
+      .specialties-container,
+      .features-container,
+      .cta-container {
+        padding: 0 20px;
+      }
+
+      .search-container {
+        padding: 30px 20px;
+      }
+
+      .search-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .specialties-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .specialty-card {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .specialty-card:nth-child(2) { animation-delay: 0.1s; }
+    .specialty-card:nth-child(3) { animation-delay: 0.2s; }
+    .specialty-card:nth-child(4) { animation-delay: 0.3s; }
+
+    .search-btn:hover {
+      animation: pulse 2s infinite;
+    }
+
+    /* Loading States */
+    .loading {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-heartbeat"></i>
+        </div>
+        <div class="logo-text">旅メディ</div>
+      </div>
+      
+      <nav class="nav-menu">
+        <div class="nav-item">予約</div>
+        <div class="nav-item">アカウント</div>
+        <div class="nav-item">旅メディ について</div>
+      </nav>
+      
+      <div class="nav-actions">
+        <div class="nav-btn" title="チャット">
+          <i class="fas fa-comments"></i>
+        </div>
+        <div class="nav-btn" title="設定">
+          <i class="fas fa-cog"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <h1 class="hero-title">最高級の医療サービスを<br>あなたの手の中に</h1>
+      <p class="hero-subtitle">プレミアムな医療体験で、あなたの健康を最優先に考えます</p>
+      
+      <div class="search-container">
+        <div class="search-row">
+          <div class="search-field">
+            <i class="fas fa-user search-icon"></i>
+            <select class="search-select">
+              <option>個人</option>
+              <option>法人</option>
+              <option>家族</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <i class="fas fa-user-md search-icon"></i>
+            <select class="search-select">
+              <option>Hoàng Tuấn</option>
+              <option>田中太郎</option>
+              <option>佐藤花子</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="search-field location-field">
+          <i class="fas fa-map-marker-alt search-icon"></i>
+          <input type="text" class="search-input" value="日本、東京都東京" placeholder="所在地を入力">
+        </div>
+        
+        <div class="search-field symptoms-field">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" placeholder="症状または診療科を入力">
+        </div>
+        
+        <button class="search-btn">
+          <i class="fas fa-search"></i>
+          プレミアム検索を開始
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialties Section -->
+  <section class="specialties-section">
+    <div class="specialties-container">
+      <h2 class="specialties-title">対応できる専門分野</h2>
+      
+      <div class="specialties-grid">
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <h3 class="specialty-title">ビデオ（オンライン）</h3>
+          <p class="specialty-subtitle">24時間いつでも、どこからでもプレミアムなオンライン診療</p>
+        </div>
+        
+        <a href="list.html" style="text-decoration: none; color: inherit;">
+          <div class="specialty-card">
+            <div class="specialty-icon">
+              <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3 class="specialty-title">一般内科医</h3>
+            <p class="specialty-subtitle">経験豊富な専門医による総合的な健康管理</p>
+          </div>
+        </a>
+        
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-bone"></i>
+          </div>
+          <h3 class="specialty-title">整形外科医</h3>
+          <p class="specialty-subtitle">運動器疾患の専門治療とリハビリテーション</p>
+        </div>
+        
+        <div class="specialty-card">
+          <div class="specialty-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="specialty-title">皮膚科医</h3>
+          <p class="specialty-subtitle">美容から治療まで、肌の健康をトータルサポート</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="features-container">
+      <div class="features-header">
+        <h2 class="features-title">なぜ旅メディ Premiumを選ぶのか</h2>
+        <p class="features-subtitle">最高品質の医療サービスと革新的な技術で、あなたの健康管理を次のレベルへ</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-crown"></i>
+          </div>
+          <h3 class="feature-title">VIP待遇</h3>
+          <p class="feature-description">優先予約、専用ラウンジ、パーソナライズされたケアプランで、特別な医療体験を提供します。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3 class="feature-title">最高のセキュリティ</h3>
+          <p class="feature-description">最新の暗号化技術により、あなたの医療情報を完全に保護し、プライバシーを最優先に管理します。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h3 class="feature-title">24時間対応</h3>
+          <p class="feature-description">緊急時も安心。専門医が24時間体制であなたの健康をサポートし、いつでも相談可能です。</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3 class="feature-title">グローバルネットワーク</h3>
+          <p class="feature-description">世界各国の最高レベルの医療機関と提携し、どこにいても最高品質の医療サービスを受けられます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2 class="cta-title">今すぐプレミアム体験を始めましょう</h2>
+      <p class="cta-subtitle">あなたの健康は、最高のケアに値します。旅メディ Premiumで新しい医療体験を。</p>
+      
+      <div class="cta-buttons">
+        <a href="#" class="cta-btn primary">
+          <i class="fas fa-star"></i>
+          プレミアム会員になる
+        </a>
+        <a href="#" class="cta-btn secondary">
+          <i class="fas fa-play"></i>
+          デモを見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth scrolling for navigation
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1)';
+          }, 150);
+        });
+      });
+
+      // Search functionality
+      const searchBtn = document.querySelector('.search-btn');
+      const searchInputs = document.querySelectorAll('.search-input, .search-select');
+
+      searchBtn.addEventListener('click', function() {
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 検索中...';
+        this.disabled = true;
+        
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-check"></i> 検索完了';
+          this.style.background = 'var(--green)';
+          
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-search"></i> プレミアム検索を開始';
+            this.style.background = 'var(--primary-gradient)';
+            this.disabled = false;
+          }, 2000);
+        }, 1500);
+      });
+
+      // Interactive specialty cards
+      document.querySelectorAll('.specialty-card').forEach(card => {
+        card.addEventListener('click', function() {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => {
+            this.style.transform = 'scale(1.02)';
+          }, 100);        <!-- ...existing code... -->
+        <script>
+          // Interactive specialty cards
+          document.querySelectorAll('.specialty-card').forEach(card => {
+            card.addEventListener('click', function() {
+              this.style.transform = 'scale(0.98)';
+              setTimeout(() => {
+                this.style.transform = 'scale(1.02)';
+              }, 100);
+              setTimeout(() => {
+                this.style.transform = 'scale(1)';
+              }, 200);
+            });
+          });
+        </script>
+        <!-- ...existing code... -->
